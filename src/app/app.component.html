@@ -1,46 +1,58 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzWidth="260px">
+  <nz-sider class="menu-sidebar" nzWidth="260px" nzCollapsible nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
     <div class="sidebar-logo">
-      <img src="../assets/Logo.png" alt="logo">
+      <a>
+        <img src="../assets/sidebar/Group.png" alt="logo">
+      </a>
     </div>
     <div class="sidebarMenu-container">
-      <ul nz-menu nzTheme="light" nzMode="inline">
-        <li nz-menu-item>
-          <i class="sidebar-icon" nz-icon nzType="dashboard"></i>
-          <a class="menu-item">Dashboard</a>
+      <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/dashboard.png" alt="">
+          <a>Dashboard</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/write.png" alt="">
           <a>Bài viết</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/fanpage.png" alt="">
           <a>Fanpage</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/user.png" alt="">
           <a>Người dùng</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/newspapers.png" alt="">
           <a>Báo chí</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/list.png" alt="">
           <a>Danh sách chủ đề</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/TopicPublic.png" alt="">
           <a>Chủ đề công khai</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item" >
+          <img src="../assets/sidebar/listAccount.png" alt="">
           <a>Danh sách tài khoản</a>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item class="menu-item">
+          <img src="../assets/sidebar/listFacebookAccount.png" alt="">
           <a>Danh sách tài khoản facebook</a>
         </li>
       </ul>
     </div>
   </nz-sider>
-  <nz-layout>
+  <nz-layout class="right-layout">
     <nz-header>
+
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+          <i class="trigger" nz-icon nzType="menu" nzTheme="outline"></i>
         </span>
       </div>
     </nz-header>

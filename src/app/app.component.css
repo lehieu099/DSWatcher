@@ -13,19 +13,28 @@
   position: relative;
   z-index: 10;
   min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
 }
 
 .header-trigger {
-  height: 64px;
-  padding: 20px 24px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all .3s, padding 0s;
+  position:absolute;
+  height: 24px;
+  width: 24px;
+  margin: 18px 0px 18px 25px;
 }
 
+.trigger{
+  font-size: 24px;
+  color: #FFFFFF
+}
 .trigger:hover {
   color: #1890ff;
+}
+
+nz-header {
+  line-height: 30px;
+  padding: 0;
+  width: 100%;
+  height: 60px;
 }
 
 .sidebar-logo {
@@ -34,7 +43,6 @@
   height: 60px;
   left: 0px;
   top: 0px;
-  /* FFFFFF */
   background: #FFFFFF;
 }
 
@@ -46,15 +54,6 @@
   top: 10px;
 }
 
-.sidebar-logo h1 {
-  display: inline-block;
-  margin: 0 0 0 20px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-  vertical-align: middle;
-}
 
 .sidebarMenu-container {
   position: absolute;
@@ -71,32 +70,35 @@
   font-weight: 400;
 }
 
+.ant-menu-item a {
+  padding-left: 14px;
+}
+
 .sidebar-icon {
   color: #292961;
   width: 16px;
   height: 16px;
 }
 
-nz-header {
-  padding: 0;
-  width: 100%;
-  z-index: 2;
-}
-
 .app-header {
   position: relative;
-  height: 64px;
+  height: 60px;
   padding: 0;
-  background: #fff;
+  background: #292961;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
+
 
 nz-content {
   margin: 24px;
 }
 
+.right-layout {
+  height: 2360px;
+}
+
 .inner-content {
   padding: 24px;
-  background: #fff;
+  background: #FFFFFF;
   height: 100%;
 }
