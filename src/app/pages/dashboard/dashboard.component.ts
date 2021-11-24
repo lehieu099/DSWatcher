@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getISOWeek } from 'date-fns';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,13 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+  
+  date = null;
+
+  onChange(result: Date[]): void {
+    console.log('onChange: ', result);
   }
 
 }

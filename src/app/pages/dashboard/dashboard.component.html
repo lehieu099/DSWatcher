@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="search-container">
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <label for="keyWord">Từ khoá</label><br>
+                <input type="text" name="keyWord" placeholder="Từ khoá muốn tìm">
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <label for="Area">Khu vực</label><br>
+                <input type="text" name="Area" placeholder="Khu vực muốn tìm">
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <label for="Time">Thời gian</label>
+                <br>
+                <nz-range-picker></nz-range-picker>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <label for="keyWord">Từ khoá</label><br>
+                <input type="text" name="keyWord" placeholder="Từ khoá muốn tìm">
+            </div>
+        </div>
+    </div>
+</div>
