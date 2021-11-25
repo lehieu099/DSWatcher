@@ -7,35 +7,15 @@
 
 .app-layout {
   height: 2360px;
+  width: 100%;
 }
 
+/* Sidebar */
 .menu-sidebar {
   position: relative;
   min-height: 100vh;
 }
 
-.header-trigger {
-  position: absolute;
-  height: 24px;
-  width: 24px;
-  margin: 18px 0px 18px 25px;
-}
-
-.trigger {
-  font-size: 24px;
-  color: #FFFFFF
-}
-
-.trigger:hover {
-  color: #1890ff;
-}
-
-nz-header {
-  line-height: 30px;
-  padding: 0;
-  width: 100%;
-  height: 60px;
-}
 
 .sidebar-logo {
   position: absolute;
@@ -81,18 +61,51 @@ nz-header {
   height: 16px;
 }
 
+/*----------------- Header ------------------*/
+
+.header-trigger {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  margin: 18px 0px 18px 25px;
+}
+
+.trigger {
+  font-size: 24px;
+  color: #FFFFFF
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+nz-header {
+  line-height: 30px;
+  padding: 0;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+
 .app-header {
   position: relative;
   height: 60px;
   padding: 0;
   background: #292961;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  display: flex;
+  flex-direction: row;
 }
 
+/* ------------- */
 nz-layout {
   position: relative;
+  box-sizing: border-box;
 }
 
 nz-content {
   margin: 23px;
+  box-sizing: border-box;
+  
 }
