@@ -552,6 +552,11 @@
     color: #FFFFFF;
 }
 
+#divLinechart {
+    height: 410px;
+    width: 100%;
+}
+
 #likeShareChart {
     height: 350px;
     margin-top: 9px;

@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     this.chartForForm();
     this.postOverTime();
     this.likeShareChart();
+    this.divLinechart();
   }
 
   chartdiv() {
@@ -116,6 +117,81 @@ export class DashboardComponent implements OnInit {
   }
 
   divLinechart() {
+    // Create chart instance
+    var chart = am4core.create("divLinechart", am4charts.XYChart);
+
+    // Add data
+    chart.data = [{
+      "country": "Lithuania",
+      "litres": 501.9,
+      "units": 250
+    }, {
+      "country": "Czech Republic",
+      "litres": 301.9,
+      "units": 222
+    }, {
+      "country": "Ireland",
+      "litres": 201.1,
+      "units": 170
+    }, {
+      "country": "Germany",
+      "litres": 165.8,
+      "units": 122
+    }, {
+      "country": "Australia",
+      "litres": 139.9,
+      "units": 99
+    }, {
+      "country": "Austria",
+      "litres": 128.3,
+      "units": 85
+    }, {
+      "country": "UK",
+      "litres": 99,
+      "units": 93
+    }, {
+      "country": "Belgium",
+      "litres": 60,
+      "units": 50
+    }, {
+      "country": "The Netherlands",
+      "litres": 50,
+      "units": 42
+    }];
+    //Create legend
+    chart.legend = new am4charts.Legend();
+    chart.legend.position = "top";
+    chart.legend.contentAlign = "right";
+
+    chart.legend.useDefaultMarker = true;
+    let marker: any = chart.legend.markers.template.children.getIndex(0);
+    marker.cornerRadius(12, 12, 12, 12);
+    marker.height = 10;
+    marker.width = 10;
+    // Create axes
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "country";
+    categoryAxis.renderer.minGridDistance = 50;
+    categoryAxis.renderer.labels.template.rotation = -45;
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Số lượng sắc thái bài viết";
+
+    // Create series
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.name = "litres";
+    series.stroke = am4core.color("#2D9CDB");
+    series.strokeWidth = 3;
+    series.dataFields.valueY = "litres";
+    series.dataFields.categoryX = "country";
+
+    var series2 = chart.series.push(new am4charts.LineSeries());
+    series2.name = "Units";
+    series2.stroke = am4core.color("#F2C94C");
+    series2.strokeWidth = 3;
+    series2.dataFields.valueY = "units";
+    series2.dataFields.categoryX = "country";
+
+    
   }
 
   postOverTime() {
@@ -267,10 +343,19 @@ export class DashboardComponent implements OnInit {
       "litres": 60,
       "units": 50
     }, {
-      "country": "The Netherlands",
+      "country": "Vietnam",
       "litres": 50,
       "units": 42
-    }];
+    }, {
+      "country": "Laos",
+      "litres": 50,
+      "units": 42
+    }, {
+      "country": "Campuchia",
+      "litres": 50,
+      "units": 42
+    }
+  ];
     //Create legend
     chart.legend = new am4charts.Legend();
     chart.legend.position = "top";
@@ -284,7 +369,7 @@ export class DashboardComponent implements OnInit {
     // Create axes
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "country";
-
+    categoryAxis.renderer.minGridDistance = 50
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.title.text = "Số lượng sắc thái bài viết";
 
