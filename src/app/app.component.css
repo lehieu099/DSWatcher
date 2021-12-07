@@ -98,6 +98,30 @@ nz-header {
   flex-direction: row;
 }
 
+.admin {
+  margin-left: auto;
+}
+
+.admin i {
+  position: absolute;
+  right: 70px;
+  top: 20px;
+}
+
+.admin span {
+  position: relative;
+  width: 41px;
+  height: 16px;
+  top: 15px;
+  right: 24px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+
 /* ------------- */
 nz-layout {
   position: relative;
@@ -107,5 +131,13 @@ nz-layout {
 nz-content {
   margin: 23px;
   box-sizing: border-box;
-  
+
 }
+
+/* .ant-menu-item-selected, .ant-menu-item:hover {
+  border: 0px solid;
+  background: #FFFFFF;
+  opacity: 0.8;
+  border-radius: 5px;
+  color: linear-gradient(270.04deg, #1984C1 0%, #2D9CDB 0%);
+} */

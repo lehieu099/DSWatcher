@@ -13,6 +13,13 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 export class DashboardComponent implements OnInit {
 
   ngOnInit() {
+    this.chartdiv();
+    this.chartForForm();
+    this.postOverTime();
+    this.likeShareChart();
+  }
+
+  chartdiv() {
     var chart = am4core.create("chartdiv", am4charts.PieChart);
 
     // Add dataF
@@ -59,10 +66,7 @@ export class DashboardComponent implements OnInit {
     chart.valign = "middle";
     chart.legend.align = "center"
 
-    this.chartForForm();
-    this.postOverTime();
   }
-
   chartForForm() {
     var chart = am4core.create("chartForForm", am4charts.PieChart);
 
@@ -119,21 +123,15 @@ export class DashboardComponent implements OnInit {
     am4core.useTheme(am4themes_animated);
     // am4core.useTheme(am4themes_kelly);
 
-    var container = am4core.create("postOverTime-chart", am4core.Container);
-    container.height = am4core.percent(100);
-    container.width = am4core.percent(100);
+    var chart = am4core.create("postOverTime-chart", am4charts.XYChart);
     // Create chart instance
-    var chart = container.createChild(am4charts.XYChart);
-    chart.marginRight = 400;
-    chart.percentWidth= 100;
-    chart.percentHeight=100;
     // Add data
     chart.data = [{
       "country": "Lithuania",
       "research": 150000,
-      "marketing": 250,
-      "sales": 199,
-      "test": 1000
+      "marketing": 300000,
+      "sales": 50000,
+      "test": 100000
     }, {
       "country": "Czech Republic",
       "research": 150000,
@@ -143,85 +141,84 @@ export class DashboardComponent implements OnInit {
 
     }, {
       "country": "Ireland",
-      "research": 100000,
-      "marketing": 170,
-      "sales": 199,
+      "research": 150000,
+      "marketing": 222,
+      "sales": 251,
       "test": 1000
     }, {
       "country": "Germany",
-      "research": 165.8,
-      "marketing": 122,
-      "sales": 90,
+      "research": 150000,
+      "marketing": 222,
+      "sales": 251,
       "test": 1000
     }, {
       "country": "Australia",
-      "research": 139.9,
-      "marketing": 99,
-      "sales": 252,
+      "research": 150000,
+      "marketing": 222,
+      "sales": 251,
       "test": 1000
     }, {
       "country": "Austria",
-      "research": 128.3,
-      "marketing": 85,
+      "research": 128000,
+      "marketing": 85000,
       "sales": 84,
       "test": 1000
     }, {
       "country": "UK",
-      "research": 99,
-      "marketing": 93,
-      "sales": 142,
+      "research": 99000,
+      "marketing": 93000,
+      "sales": 142000,
       "test": 1000
     }, {
       "country": "Belgium",
-      "research": 60,
-      "marketing": 50,
-      "sales": 55,
-      "test": 1000
+      "research": 60000,
+      "marketing": 500000,
+      "sales": 55000,
+      "test": 10000
     }, {
       "country": "The Netherlands",
-      "research": 50,
-      "marketing": 42,
-      "sales": 25,
-      "test": 1000
-    }];
-
-    //console.log('chart', chart);
-
+      "research": 500000,
+      "marketing": 420000,
+      "sales": 25000,
+      "test": 10000
+    }
+    ];
 
     // Create axes
-    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "country";
-    categoryAxis.title.text = "Local country offices";
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.renderer.minGridDistance = 20;
 
 
-    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = "Expenditure (M)";
+
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Số lượng sắc thái bài viết";
+
 
     // Create series
-    var series = chart.series.push(new am4charts.ColumnSeries());
+    let series = chart.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = "research";
     series.dataFields.categoryX = "country";
     series.name = "Research";
     series.tooltipText = "{name}: [bold]{valueY}[/]";
     series.stacked = true;
 
-    var series2 = chart.series.push(new am4charts.ColumnSeries());
+    let series2 = chart.series.push(new am4charts.ColumnSeries());
     series2.dataFields.valueY = "marketing";
     series2.dataFields.categoryX = "country";
     series2.name = "Marketing";
     series2.tooltipText = "{name}: [bold]{valueY}[/]";
     series2.stacked = true;
 
-    var series3 = chart.series.push(new am4charts.ColumnSeries());
+    let series3 = chart.series.push(new am4charts.ColumnSeries());
     series3.dataFields.valueY = "sales";
     series3.dataFields.categoryX = "country";
     series3.name = "Sales";
     series3.tooltipText = "{name}: [bold]{valueY}[/]";
     series3.stacked = true;
 
-    var series4 = chart.series.push(new am4charts.ColumnSeries());
+    let series4 = chart.series.push(new am4charts.ColumnSeries());
     series4.dataFields.valueY = "test";
     series4.dataFields.categoryX = "country";
     series4.name = "Test";
@@ -230,6 +227,83 @@ export class DashboardComponent implements OnInit {
 
     // Add cursor
     chart.cursor = new am4charts.XYCursor();
+  }
+
+  likeShareChart() {
+    // Create chart instance
+    var chart = am4core.create("likeShareChart", am4charts.XYChart);
+
+    // Add data
+    chart.data = [{
+      "country": "Lithuania",
+      "litres": 501.9,
+      "units": 250
+    }, {
+      "country": "Czech Republic",
+      "litres": 301.9,
+      "units": 222
+    }, {
+      "country": "Ireland",
+      "litres": 201.1,
+      "units": 170
+    }, {
+      "country": "Germany",
+      "litres": 165.8,
+      "units": 122
+    }, {
+      "country": "Australia",
+      "litres": 139.9,
+      "units": 99
+    }, {
+      "country": "Austria",
+      "litres": 128.3,
+      "units": 85
+    }, {
+      "country": "UK",
+      "litres": 99,
+      "units": 93
+    }, {
+      "country": "Belgium",
+      "litres": 60,
+      "units": 50
+    }, {
+      "country": "The Netherlands",
+      "litres": 50,
+      "units": 42
+    }];
+    //Create legend
+    chart.legend = new am4charts.Legend();
+    chart.legend.position = "top";
+    chart.legend.contentAlign = "right";
+
+    chart.legend.useDefaultMarker = true;
+    let marker: any = chart.legend.markers.template.children.getIndex(0);
+    marker.cornerRadius(12, 12, 12, 12);
+    marker.height = 10;
+    marker.width = 10;
+    // Create axes
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "country";
+
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Số lượng sắc thái bài viết";
+
+    // Create series
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.name = "litres";
+    series.stroke = am4core.color("#2D9CDB");
+    series.strokeWidth = 3;
+    series.dataFields.valueY = "litres";
+    series.dataFields.categoryX = "country";
+
+    var series2 = chart.series.push(new am4charts.LineSeries());
+    series2.name = "Units";
+    series2.stroke = am4core.color("#F2C94C");
+    series2.strokeWidth = 3;
+    series2.dataFields.valueY = "units";
+    series2.dataFields.categoryX = "country";
+
+
   }
   constructor() { }
 

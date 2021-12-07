@@ -35,14 +35,14 @@
     </div>
     <div class="sidebarMenu-container">
       <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-menu-item class="menu-item" nzMatchRouter>
+        <li nz-menu-item class="menu-item" class="active">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M0.888889 8.88889H6.22222C6.71111 8.88889 7.11111 8.48889 7.11111 8V0.888889C7.11111 0.4 6.71111 0 6.22222 0H0.888889C0.4 0 0 0.4 0 0.888889V8C0 8.48889 0.4 8.88889 0.888889 8.88889ZM0.888889 16H6.22222C6.71111 16 7.11111 15.6 7.11111 15.1111V11.5556C7.11111 11.0667 6.71111 10.6667 6.22222 10.6667H0.888889C0.4 10.6667 0 11.0667 0 11.5556V15.1111C0 15.6 0.4 16 0.888889 16ZM9.77778 16H15.1111C15.6 16 16 15.6 16 15.1111V8C16 7.51111 15.6 7.11111 15.1111 7.11111H9.77778C9.28889 7.11111 8.88889 7.51111 8.88889 8V15.1111C8.88889 15.6 9.28889 16 9.77778 16ZM8.88889 0.888889V4.44444C8.88889 4.93333 9.28889 5.33333 9.77778 5.33333H15.1111C15.6 5.33333 16 4.93333 16 4.44444V0.888889C16 0.4 15.6 0 15.1111 0H9.77778C9.28889 0 8.88889 0.4 8.88889 0.888889Z"
                 fill="#292961" />
             </svg>
           </i>
-          <span><a routerLink="/dashboard"></a> Dashboard</span>
+          <span><a routerLink="/dashboard"></a>Dashboard</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
                 fill="white" />
             </svg>
           </i>
-          <span>Bài viết</span>
+          <span><a routerLink="/write"></a>Bài viết</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +64,7 @@
                 fill="white" />
             </svg>
           </i>
-          <span>Fanpage</span>
+          <span><a routerLink="#"></a>Fanpage</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +73,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Người dùng</span>
+          <span><a routerLink="#"></a>Người dùng</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Báo chí</span>
+          <span><a routerLink="#"></a>Báo chí</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +103,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Danh sách chủ đề</span>
+          <span><a routerLink="#"></a>Danh sách chủ đề</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +160,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Chủ đề công khai</span>
+          <span><a routerLink="#"></a>Chủ đề công khai</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Danh sách tài khoản</span>
+          <span><a routerLink="#"></a>Danh sách tài khoản</span>
         </li>
         <li nz-menu-item class="menu-item">
           <i nz-icon><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +178,7 @@
                 fill="#292961" />
             </svg>
           </i>
-          <span>Danh sách tài khoản facebook</span>
+          <span><a routerLink="#"></a>Danh sách tài khoản facebook</span>
         </li>
       </ul>
     </div>
@@ -191,7 +191,17 @@
             <i class="trigger" nz-icon nzType="menu" nzTheme="outline"></i>
           </span>
         </div>
+        <div class="admin">
+          <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 3C11.66 3 13 4.34 13 6C13 7.66 11.66 9 10 9C8.34 9 7 7.66 7 6C7 4.34 8.34 3 10 3ZM10 17.2C8.81186 17.2 7.64218 16.906 6.59528 16.3441C5.54837 15.7823 4.65678 14.9701 4 13.98C4.03 11.99 8 10.9 10 10.9C11.99 10.9 15.97 11.99 16 13.98C15.3432 14.9701 14.4516 15.7823 13.4047 16.3441C12.3578 16.906 11.1881 17.2 10 17.2Z"
+                fill="white" />
+            </svg>
+          </i>
+          <span>Admin</span>
+        </div>
       </div>
+
     </nz-header>
     <nz-content>
       <div class="inner-content">
