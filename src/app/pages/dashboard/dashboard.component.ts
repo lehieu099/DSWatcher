@@ -56,8 +56,6 @@ export class DashboardComponent implements OnInit {
     // const marker:any = chart.legend.markers.template.children.getIndex(0);
     // var marker:any = chart.legend.markers.template.children.getIndex(0);
     // marker.cornerRadius(12, 12, 12, 12);
-
-
     // marker.height=10;
     // marker.width = 10;
     chart.legend.position = "top";
@@ -65,10 +63,11 @@ export class DashboardComponent implements OnInit {
     chart.legend.fontSize = 12;
     chart.align = "center";
     chart.valign = "middle";
-    chart.legend.align = "center"
+    chart.legend.align = "center";
 
   }
-  chartForForm() {
+
+  chartForForm(): void {
     var chart = am4core.create("chartForForm", am4charts.PieChart);
 
     // Add dataF
@@ -109,11 +108,40 @@ export class DashboardComponent implements OnInit {
     // marker.height=10;
     // marker.width = 10;
     chart.legend.position = "top";
-    // chart.legend.align="center";
     chart.legend.fontSize = 12;
     chart.align = "center";
     chart.valign = "middle";
     chart.legend.align = "center"
+
+    chart.responsive.enabled = true;
+
+    chart.responsive.rules.push({
+      relevant: function (target) {
+        if (target.pixelWidth <= 600) {
+          return true;
+        }
+        return false;
+      },
+      state: function(target, stateId) {
+        if (target instanceof am4charts.PieSeries) {
+          var state = target.states.create(stateId);
+
+          var labelState = target.labels.template.states.create(stateId);
+          labelState.properties.disabled = true;
+
+          var tickState = target.ticks.template.states.create(stateId);
+          tickState.properties.disabled = true;
+          return state;
+        }
+
+        return;
+      }
+    });
+
+
+
+
+
   }
 
   divLinechart() {
@@ -191,7 +219,7 @@ export class DashboardComponent implements OnInit {
     series2.dataFields.valueY = "units";
     series2.dataFields.categoryX = "country";
 
-    
+
   }
 
   postOverTime() {
@@ -355,7 +383,7 @@ export class DashboardComponent implements OnInit {
       "litres": 50,
       "units": 42
     }
-  ];
+    ];
     //Create legend
     chart.legend = new am4charts.Legend();
     chart.legend.position = "top";

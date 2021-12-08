@@ -9,8 +9,8 @@ import { NgZorroAntdModule } from 'src/app/ng-antd-zorro/ng-zorro-antd.module';
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    DashboardRoutingModule
   ],
   exports:[DashboardComponent]
 })

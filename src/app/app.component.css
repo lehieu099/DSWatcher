@@ -4,9 +4,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .app-layout {
-  height: 2360px;
+  /* height: 2360px; */
   width: 100%;
 }
 
@@ -14,6 +13,7 @@
 .menu-sidebar {
   position: relative;
   min-height: 100vh;
+  background: #FFFFFF;
 }
 
 
@@ -38,7 +38,7 @@
 .sidebarMenu-container {
   position: absolute;
   width: 260px;
-  height: 2300px;
+  height: 800px;
   left: 0;
   top: 60px;
   background-color: #FFFFFF;

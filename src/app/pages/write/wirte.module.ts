@@ -8,8 +8,8 @@ import { WirteRoutingModule} from './wirte-routing.module';
   declarations: [WriteComponent],
   imports: [
     CommonModule,
-    WirteRoutingModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    WirteRoutingModule
   ],
   exports:[WriteComponent]
 })
