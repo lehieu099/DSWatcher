@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { DSwatcherService } from 'src/app/service/dswatcher.service';
 
 interface DataItem {
   id: number;
   userName: string;
-  permission: string;
+  perMission: string;
   status: boolean;
   email: string;
 }
@@ -15,118 +18,78 @@ interface DataItem {
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  userName = '';
+  user: any;
+  loading = true;
+  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message : NzMessageService) {
+    this.retrieveData();
+  }
 
   ngOnInit(): void {
+    this.retrieveData();
   }
 
-  listUser: DataItem[] = [
-    {
-      id: 0,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 1,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: false,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 2,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: false,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 3,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 4,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 5,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: false,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 6,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 7,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: false,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 8,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 9,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 10,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 11,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 12,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
-    },
-    {
-      id: 13,
-      userName: "HieuLD",
-      permission: "Người dùng",
-      status: true,
-      email: "duyhieu099@gmail.com"
+
+
+  Edit(i: any): void {
+  }
+
+  Delete(i: any, userName: any): void {
+    this.dsWatcherService.delete(i).subscribe(
+      response =>{
+        console.log(response);
+        this.retrieveData();
+        this.message.create('warning',`Đã xoá người dùng <b>${userName}</b>`);
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+  }
+
+  
+  deleteMessage(type: string): void {
+    
+  }
+
+  retrieveData(): void {
+    this.dsWatcherService.getAll().subscribe(
+      data => {
+        this.user = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.loading = false;
+  }
+
+  //trigger input search
+  keyDown(event: any) {
+    if (event.keyCode == 13) {
+      this.btnSearch();
     }
-  ];
-  listOfUser = [...this.listUser];
-
-
-  del(i: any): void {
   }
 
-  edit(i:any):void{
+  btnSearch(): void {
+    this.loading = false;
+    this.dsWatcherService.findByUserName(this.userName).subscribe(
+      data => {
+        this.user = data;
+        if (this.user.length == 0) {
+          window.alert("Khong co username trong du lieu");
+          this.retrieveData();
+        }
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
+  btnAdd(): void {
+    this.route.navigateByUrl('user/adduser');
   }
 }
