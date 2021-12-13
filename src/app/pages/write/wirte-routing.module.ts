@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { WriteComponent } from './write.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: WriteComponent }
 ];
 
 @NgModule({
@@ -14,4 +14,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class WirteRoutingModule { }
