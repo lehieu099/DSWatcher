@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
 
   chartdiv() {
     var chart = am4core.create("chartdiv", am4charts.PieChart);
-
     // Add dataF
     chart.data = [{
       "country": "Cá nhân",
@@ -122,7 +121,7 @@ export class DashboardComponent implements OnInit {
         }
         return false;
       },
-      state: function(target, stateId) {
+      state: function (target, stateId) {
         if (target instanceof am4charts.PieSeries) {
           var state = target.states.create(stateId);
 
