@@ -5,13 +5,12 @@ import { DashboardComponent } from './dashboard.component';
 import { NgZorroAntdModule } from 'src/app/ng-antd-zorro/ng-zorro-antd.module';
 
 
-
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    DashboardRoutingModule
   ],
   exports:[DashboardComponent]
 })
