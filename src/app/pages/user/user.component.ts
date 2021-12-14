@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DSwatcherService } from 'src/app/service/dswatcher.service';
@@ -21,36 +21,20 @@ export class UserComponent implements OnInit {
   userName = '';
   user: any;
   loading = true;
-  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message : NzMessageService) {
-    this.retrieveData();
+  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message : NzMessageService, private zone:NgZone) {
+  
   }
 
   ngOnInit(): void {
-    this.retrieveData();
+    this.zone.run(() => {
+      this.retrieveData();
+    });
+
   }
 
 
-
-  Edit(i: any): void {
-  }
-
-  Delete(i: any, userName: any): void {
-    this.dsWatcherService.delete(i).subscribe(
-      response =>{
-        console.log(response);
-        this.retrieveData();
-        this.message.create('warning',`Đã xoá người dùng <b>${userName}</b>`);
-      },
-      error =>{
-        console.log(error);
-      }
-    )
-  }
 
   
-  deleteMessage(type: string): void {
-    
-  }
 
   retrieveData(): void {
     this.dsWatcherService.getAll().subscribe(
@@ -91,5 +75,22 @@ export class UserComponent implements OnInit {
 
   btnAdd(): void {
     this.route.navigateByUrl('user/adduser');
+  }
+
+  Edit(id: any): void {
+    this.route.navigateByUrl(`user/${id}`)
+  }
+
+  Delete(i: any, userName: any): void {
+    this.dsWatcherService.delete(i).subscribe(
+      response =>{
+        console.log(response);
+        this.retrieveData();
+        this.message.create('warning',`Đã xoá người dùng <b>${userName}</b>`);
+      },
+      error =>{
+        console.log(error);
+      }
+    )
   }
 }

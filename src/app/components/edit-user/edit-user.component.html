@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="title">
+        <span>Chỉnh sửa thông tin người dùng </span>
+        <hr>
+    </div>
+    <form nz-form [formGroup]="editUserForm" (ngSubmit)="submitEditUserForm()">
+        <nz-form-item>
+            <nz-form-label nzFor="" nzSpan="7" nzRequired>Username</nz-form-label>
+            <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl" nzSpan="12">
+                <input class="input" nzInput formControlName="userNameEdit" placeholder="Username" minlength="6" name="minlength"
+                    [(ngModel)]=currentUser.userName>
+                <ng-template #userErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please enter username</ng-container>
+                    <ng-container *ngIf="control.hasError('minlength')">Min length is 6</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzFor="" nzSpan="7" nzRequired>Quyền</nz-form-label>
+            <nz-form-control nzValidatingTip="Validating..." nzSpan="12">
+                <nz-select formControlName="perMissionEdit" [ngModel]="'user'" nzPlaceHolder="Please choose permission"
+                    [(ngModel)]=currentUser.perMission>
+                    <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
+                    <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
+                    <nz-option nzValue="Supervisor" nzLabel="Giám sát"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzFor="" nzSpan="7" nzRequired>Trạng thái</nz-form-label>
+            <nz-form-control nzSpan="12" nzValidateStatus="validating">
+                <nz-select formControlName="statusEdit" [ngModel]="true" nzPlaceHolder="Please choose status"
+                    [(ngModel)]=currentUser.status>
+                    <nz-option [nzValue]="true" nzLabel="Active"></nz-option>
+                    <nz-option [nzValue]="false" nzLabel="Deactive"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzSpan="7" nzRequired>Email</nz-form-label>
+            <nz-form-control nzSpan="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="emailErrorTpl">
+                <input class="input" nzInput formControlName="emailEdit" placeholder="Email" type="emailEit" name="emailEdit" 
+                [(ngModel)] = currentUser.email>
+                <ng-template #emailErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('email')">The input is not valid E-mail!</ng-container>
+                    <ng-container *ngIf="control.hasError('required')">Please input E-mail!</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control nzOffset="7" nzSpan="12">
+                <button nz-button nzType="primary" [disabled]="!editUserForm.valid"
+                    >Update</button>
+                <button nz-button (click)="cancel()">Cancel</button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>

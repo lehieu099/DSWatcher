@@ -1,0 +1,36 @@
+
+[nz-form] {
+    max-width: 600px;
+    margin: 30px;
+}
+
+.input{
+    width: 300px;
+    padding: 0 8px;
+}
+
+button {
+    margin-left: 8px;
+}
+
+.title span{
+    width: 257px;
+    height: 30px;
+    left: 309px;
+    top: 92px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 20px;
+    align-items: center;
+    color: #333333;
+    margin: 12px 0 8px 27px;
+}
+
+.container {
+    height: 750px;
+    left: 282px;
+    top: 80px;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
