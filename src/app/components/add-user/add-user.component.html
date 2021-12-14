@@ -7,7 +7,7 @@
         <nz-form-item>
             <nz-form-label nzFor="" nzSpan="7" nzRequired>Username</nz-form-label>
             <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl" nzSpan="12">
-                <input nzInput formControlName="userName" placeholder="Username" minlength="6" name="minlength">
+                <input class="input" nzInput formControlName="userName" placeholder="Username" minlength="6" name="minlength">
                 <ng-template #userErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">Please enter username</ng-container>
                     <ng-container *ngIf="control.hasError('minlength')">Min length is 6</ng-container>
@@ -17,7 +17,7 @@
 
         <nz-form-item>
             <nz-form-label nzFor="" nzSpan="7" nzRequired>Permission</nz-form-label>
-            <nz-form-control nzValidatingTip="Validating..." nzSpan="12" formControlname="perMission" >
+            <nz-form-control nzValidatingTip="Validating..." nzSpan="12"  >
                 <nz-select formControlName="perMission" [ngModel]="'user'" nzPlaceHolder="Please choose permission">
                     <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
                     <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
@@ -28,7 +28,7 @@
 
         <nz-form-item>
             <nz-form-label nzFor="" nzSpan="7" nzRequired>Trạng thái</nz-form-label>
-            <nz-form-control nzSpan="12" nzValidateStatus="validating" formControlname="status">
+            <nz-form-control nzSpan="12" nzValidateStatus="validating">
                 <nz-select formControlName="status" [ngModel]="true" nzPlaceHolder="Please choose status" >
                     <nz-option [nzValue]="true" nzLabel="Active"></nz-option>
                     <nz-option [nzValue]="false" nzLabel="Deactive"></nz-option>
@@ -39,7 +39,7 @@
         <nz-form-item>
             <nz-form-label nzSpan="7" nzRequired>Email</nz-form-label>
             <nz-form-control nzSpan="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="emailErrorTpl">
-                <input nzInput formControlName="email" placeholder="Email" type="email" name="email">
+                <input class="input" nzInput formControlName="email" placeholder="Email" type="email" name="email">
                 <ng-template #emailErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('email')">The input is not valid E-mail!</ng-container>
                     <ng-container *ngIf="control.hasError('required')">Please input E-mail!</ng-container>

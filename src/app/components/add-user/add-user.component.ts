@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Router } from '@angular/router';
 import { DSwatcherService } from 'src/app/service/dswatcher.service';
 
-import { UserComponent } from 'src/app/pages/user/user.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface DataItem {
@@ -23,7 +22,10 @@ export class AddUserComponent implements OnInit {
 
   addUserForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: Router, private dsWatcherService: DSwatcherService, private message: NzMessageService) {
+  constructor(private fb: FormBuilder,
+    private route: Router,
+    private dsWatcherService: DSwatcherService,
+    private message: NzMessageService) {
     this.addUserForm = this.fb.group({
       userName: ['', [Validators.required]],
       perMission: [''],
