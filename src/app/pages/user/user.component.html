@@ -51,7 +51,8 @@
           <td class="action">
             <button nz-button nzType="primary" (click)="Edit(i.id)">Edit</button>
             <nz-divider nzType="vertical"></nz-divider>
-            <button nz-button nzDanger (click)="Delete(i.id, i.userName)">Delete</button>
+            <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle='Bạn muốn xoá người dùng {{i.userName}}'
+              nzPopconfirmPlacement='topLeft' (nzOnConfirm)="Delete(i.id, i.userName)">Delete</button>
           </td>
         </tr>
       </tbody>

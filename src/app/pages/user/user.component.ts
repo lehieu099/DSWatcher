@@ -3,13 +3,6 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DSwatcherService } from 'src/app/service/dswatcher.service';
 
-interface DataItem {
-  id: number;
-  userName: string;
-  perMission: string;
-  status: boolean;
-  email: string;
-}
 
 @Component({
   selector: 'app-user',
@@ -21,8 +14,8 @@ export class UserComponent implements OnInit {
   userName = '';
   user: any;
   loading = true;
-  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message : NzMessageService, private zone:NgZone) {
-  
+  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message: NzMessageService, private zone: NgZone) {
+
   }
 
   ngOnInit(): void {
@@ -34,7 +27,7 @@ export class UserComponent implements OnInit {
 
 
 
-  
+
 
   retrieveData(): void {
     this.dsWatcherService.getAll().subscribe(
@@ -83,12 +76,12 @@ export class UserComponent implements OnInit {
 
   Delete(i: any, userName: any): void {
     this.dsWatcherService.delete(i).subscribe(
-      response =>{
+      response => {
         console.log(response);
         this.retrieveData();
-        this.message.create('warning',`Đã xoá người dùng <b>${userName}</b>`);
+        this.message.create('warning', `Đã xoá người dùng <b>${userName}</b>`);
       },
-      error =>{
+      error => {
         console.log(error);
       }
     )

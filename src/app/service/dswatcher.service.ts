@@ -38,5 +38,4 @@ export class DSwatcherService {
   findByUserName(userName: any): Observable<any> {
     return this.http.get(`${baseUrl}?userName=${userName}`);
   }
-  
 }
