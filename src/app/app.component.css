@@ -141,3 +141,11 @@ nz-content {
   border-radius: 5px;
   color: linear-gradient(270.04deg, #1984C1 0%, #2D9CDB 0%);
 } */
+
+.logo-small{
+  position: absolute;
+  width: 100.45px;
+  height: 40px;
+  left: 20px !important;
+  top: 10px;
+}
