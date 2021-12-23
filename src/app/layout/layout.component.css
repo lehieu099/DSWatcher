@@ -1,0 +1,151 @@
+:host {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .app-layout {
+    /* height: 2360px; */
+    width: 100%;
+  }
+  
+  /* Sidebar */
+  .menu-sidebar {
+    position: relative;
+    min-height: 100vh;
+    background: #FFFFFF;
+  }
+  
+  
+  .sidebar-logo {
+    position: absolute;
+    width: 260px;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+  }
+  
+  .sidebar-logo i {
+    position: absolute;
+    width: 100.45px;
+    height: 40px;
+    left: 80px;
+    top: 10px;
+  }
+  
+  
+  .sidebarMenu-container {
+    position: absolute;
+    width: 260px;
+    height: 800px;
+    left: 0;
+    top: 60px;
+    background-color: #FFFFFF;
+  }
+  
+  .menu-item {
+    color: #292961;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    display: block !important;
+  }
+  
+  .ant-menu.ant-menu-inline-collapsed>.ant-menu-item, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title, .ant-menu.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title {
+    padding-left: 30px;
+  }
+  
+  .sidebar-icon {
+    color: #292961;
+    width: 16px;
+    height: 16px;
+  }
+  
+  /*----------------- Header ------------------*/
+  
+  .header-trigger {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    margin: 18px 0px 18px 25px;
+  }
+  
+  .trigger {
+    font-size: 24px;
+    color: #FFFFFF
+  }
+  
+  .trigger:hover {
+    color: #1890ff;
+  }
+  
+  nz-header {
+    line-height: 30px;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+  }
+  
+  
+  .app-header {
+    position: relative;
+    height: 60px;
+    padding: 0;
+    background: #292961;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .admin {
+    margin-left: auto;
+  }
+  
+  .admin i {
+    position: absolute;
+    right: 70px;
+    top: 20px;
+  }
+  
+  .admin span {
+    position: relative;
+    width: 41px;
+    height: 16px;
+    top: 15px;
+    right: 24px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+  }
+  
+  /* ------------- */
+  nz-layout {
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  nz-content {
+    margin: 23px;
+    box-sizing: border-box;
+  
+  }
+  
+  /* .ant-menu-item-selected, .ant-menu-item:hover {
+    border: 0px solid;
+    background: #FFFFFF;
+    opacity: 0.8;
+    border-radius: 5px;
+    color: linear-gradient(270.04deg, #1984C1 0%, #2D9CDB 0%);
+  } */
+  
+  .logo-small{
+    position: absolute;
+    width: 100.45px;
+    height: 40px;
+    left: 20px !important;
+    top: 10px;
+  }
