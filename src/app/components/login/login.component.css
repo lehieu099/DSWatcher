@@ -1,0 +1,25 @@
+.container{
+    /* margin: auto; */
+    padding-top: 9rem;
+    justify-content: center;
+    height: auto;
+  }
+  
+  .login-form {
+    border: 1px solid rgb(224, 214, 214);
+    max-width: 55%;
+    padding: 2rem;
+    box-shadow: 1px 1px 1px rgb(197, 194, 194);
+  }
+  
+  .login-form-margin {
+    margin-bottom: 16px;
+  }
+  
+  .login-form-forgot {
+    float: right;
+  }
+  
+  .login-form-button {
+    width: 100%;
+  }
