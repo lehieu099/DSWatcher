@@ -54,10 +54,10 @@ export class UserComponent implements OnInit {
     this.dsWatcherService.findByUserName(this.userName).subscribe(
       data => {
         this.user = data;
-        if (this.user.length == 0) {
-          window.alert("Khong co username trong du lieu");
-          this.retrieveData();
-        }
+        // if (this.user.length == 0) {
+        //   window.alert("Khong co username trong du lieu");
+        //   this.retrieveData();
+        // }
         console.log(data);
       },
       error => {
@@ -82,6 +82,21 @@ export class UserComponent implements OnInit {
         this.message.create('warning', `Đã xoá người dùng <b>${userName}</b>`);
       },
       error => {
+        console.log(error);
+      }
+    )
+  }
+
+  disableAccount = false;
+  checkStatusSwitch(status: any, data:any){
+    console.log(status);
+    console.log(data);
+
+    this.dsWatcherService.update(status, data).subscribe(
+      response =>{
+        console.log(response);
+      },
+      error =>{
         console.log(error);
       }
     )
