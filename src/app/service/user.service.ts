@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseUrl = "https://61ae053ea7c7f3001786f56f.mockapi.io/DSWatcher";
+const baseUrl = "http://localhost:8000/api/users";
 
 @Injectable({
   providedIn: 'root'
