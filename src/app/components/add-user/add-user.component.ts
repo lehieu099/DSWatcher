@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DSwatcherService } from 'src/app/service/dswatcher.service';
+import { DSwatcherService } from 'src/app/service/user.service';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface DataItem {
   id: number;
   userName: string;
-  perMission: string;
+  permission: string;
   status: boolean;
   email: string;
 }
@@ -27,8 +27,8 @@ export class AddUserComponent implements OnInit {
     private dsWatcherService: DSwatcherService,
     private message: NzMessageService) {
     this.addUserForm = this.fb.group({
-      userName: ['', [Validators.required]],
-      perMission: [''],
+      username: ['', [Validators.required]],
+      permission: [''],
       status: [''],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -50,10 +50,10 @@ export class AddUserComponent implements OnInit {
         console.log(error);
       }
     )
-    this.route.navigateByUrl('/user');
+    this.route.navigateByUrl('/users');
   }
 
   cancel() {
-    this.route.navigateByUrl('/user');
+    this.route.navigateByUrl('/users');
   }
 }
