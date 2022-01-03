@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { DSwatcherService } from 'src/app/service/dswatcher.service';
+import { DSwatcherService } from 'src/app/service/user.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { DSwatcherService } from 'src/app/service/dswatcher.service';
 })
 export class UserComponent implements OnInit {
 
-  userName = '';
+  username = '';
   user: any;
   loading = true;
   constructor(private dsWatcherService: DSwatcherService, private route: Router, private message: NzMessageService, private zone: NgZone) {
@@ -51,7 +51,7 @@ export class UserComponent implements OnInit {
 
   btnSearch(): void {
     this.loading = false;
-    this.dsWatcherService.findByUserName(this.userName).subscribe(
+    this.dsWatcherService.findByUserName(this.username).subscribe(
       data => {
         this.user = data;
         // if (this.user.length == 0) {
@@ -67,19 +67,19 @@ export class UserComponent implements OnInit {
   }
 
   btnAdd(): void {
-    this.route.navigateByUrl('user/adduser');
+    this.route.navigateByUrl('users/adduser');
   }
 
   Edit(id: any): void {
-    this.route.navigateByUrl(`user/${id}`)
+    this.route.navigateByUrl(`users/${id}`)
   }
 
-  Delete(i: any, userName: any): void {
+  Delete(i: any, username: any): void {
     this.dsWatcherService.delete(i).subscribe(
       response => {
         console.log(response);
         this.retrieveData();
-        this.message.create('warning', `Đã xoá người dùng <b>${userName}</b>`);
+        this.message.create('warning', `Đã xoá người dùng <b>${username}</b>`);
       },
       error => {
         console.log(error);

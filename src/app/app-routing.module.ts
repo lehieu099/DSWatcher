@@ -24,17 +24,17 @@ const routes: Routes = [
           m.WirteModule)
       },
       {
-        path: 'user',
+        path: 'users',
         loadChildren: () => import('./pages/user/user.module').then(m =>
           m.UserModule)
       },
       {
-        path: 'user/adduser',
+        path: 'users/adduser',
         loadChildren: () => import('./components/add-user/add-user.module').then(m =>
           m.AddUserModule)
       },
       {
-        path: 'user/:id',
+        path: 'users/:id',
         loadChildren: () => import('./components/edit-user/edit-user.module').then(m =>
           m.EditUserModule)
       }

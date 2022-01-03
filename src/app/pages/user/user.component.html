@@ -5,7 +5,7 @@
   </div>
 
   <div class="search-add">
-    <input class="form-control" type="text" name="search" id="userSearch" placeholder="Tìm kiếm" [(ngModel)]="userName"
+    <input class="form-control" type="text" name="search" id="userSearch" placeholder="Tìm kiếm" [(ngModel)]="username"
       (keydown)='keyDown($event)'>
     <button nz-button nzType="primary" id="btn-search" (click)="btnSearch()"><i nz-icon nzType="search"
         nzTheme="outline"></i>
@@ -29,8 +29,8 @@
       <tbody class="tbody">
         <tr *ngFor="let i of nzTable.data">
           <td class="counterCell"></td>
-          <td>{{i.userName}}</td>
-          <td>{{i.perMission}}</td>
+          <td>{{i.username}}</td>
+          <td>{{i.permission}}</td>
           <td #active *ngIf="i.status">
             <i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -52,11 +52,11 @@
             <button nz-button nzType="primary" (click)="Edit(i.id)">Edit</button>
             <nz-divider nzType="vertical"></nz-divider>
 
-            <nz-switch [(ngModel)]="i.status" (ngModelChange)= checkStatusSwitch(i.id,i)></nz-switch>
+            <nz-switch [(ngModel)]="i.status" (ngModelChange)=checkStatusSwitch(i.id,i)></nz-switch>
             <nz-divider nzType="vertical"></nz-divider>
 
-            <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle='Bạn muốn xoá người dùng {{i.userName}}'
-              nzPopconfirmPlacement='topLeft' (nzOnConfirm)="Delete(i.id, i.userName)">Delete</button>
+            <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle='Bạn muốn xoá người dùng {{i.username}}'
+              nzPopconfirmPlacement='topLeft' (nzOnConfirm)="Delete(i.id, i.username)">Delete</button>
           </td>
         </tr>
       </tbody>
