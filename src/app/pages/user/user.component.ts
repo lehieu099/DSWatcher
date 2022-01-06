@@ -12,7 +12,7 @@ import { DSwatcherService } from 'src/app/service/user.service';
 export class UserComponent implements OnInit {
 
   username = '';
-  user: any;
+  listuser: any;
   loading = true;
   constructor(private dsWatcherService: DSwatcherService, private route: Router, private message: NzMessageService, private zone: NgZone) {
 
@@ -22,23 +22,28 @@ export class UserComponent implements OnInit {
     this.zone.run(() => {
       this.retrieveData();
     });
-
   }
-
-
-
-
 
   retrieveData(): void {
     this.dsWatcherService.getAll().subscribe(
       data => {
-        this.user = data;
+        this.listuser = data;
+        for (var user of this.listuser) {
+          if (user.permission == "user") {
+            user.permission = "Người dùng";
+          }
+          else if (user.permission == "admin") {
+            user.permission = "Admin"
+          }
+          else user.permission = "Giám sát";
+        }
         console.log(data);
       },
       error => {
         console.log(error);
       }
     );
+
     this.loading = false;
   }
 
@@ -53,11 +58,7 @@ export class UserComponent implements OnInit {
     this.loading = false;
     this.dsWatcherService.findByUserName(this.username).subscribe(
       data => {
-        this.user = data;
-        // if (this.user.length == 0) {
-        //   window.alert("Khong co username trong du lieu");
-        //   this.retrieveData();
-        // }
+        this.listuser = data;
         console.log(data);
       },
       error => {
@@ -88,15 +89,15 @@ export class UserComponent implements OnInit {
   }
 
   disableAccount = false;
-  checkStatusSwitch(status: any, data:any){
-    console.log(status);
+  checkStatusSwitch(id: any, data: any) {
+    console.log(id);
     console.log(data);
 
-    this.dsWatcherService.update(status, data).subscribe(
-      response =>{
+    this.dsWatcherService.update(id, data).subscribe(
+      response => {
         console.log(response);
       },
-      error =>{
+      error => {
         console.log(error);
       }
     )
