@@ -14,10 +14,10 @@ export class EditUserComponent implements OnInit {
 
   editUserForm: FormGroup;
   currentUser: any;
-  username: string = "";
-  permission: string = "";
-  status: boolean = false;
-  email: string = "";
+  username: any;
+  permission: any;
+  status: any;
+  email: any;
 
   constructor(private router: Router,
     private message: NzMessageService,
@@ -44,11 +44,6 @@ export class EditUserComponent implements OnInit {
     this.dsWatcherService.get(id).subscribe(
       data => {
         this.currentUser = data;
-        this.username = this.currentUser.username;
-        this.permission = this.currentUser.permission;
-        this.status = this.currentUser.status;
-        this.email = this.currentUser.email;
-        console.log(data);
       },
       error => {
         console.log(error);
@@ -57,11 +52,13 @@ export class EditUserComponent implements OnInit {
   }
 
   submitEditUserForm() {
+    console.log(this.currentUser);
+
     this.dsWatcherService.update(this.currentUser.id, this.currentUser).subscribe(
-      data => {
-        console.log(data);
-        this.message.create('success', `Cập nhật người dùng thành công!`);
+      response => {
+        // this.message.create('success', `Cập nhật người dùng thành công!`);
         this.router.navigateByUrl('/users');
+
       },
       error => {
         console.log(error);
