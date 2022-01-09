@@ -1,5 +1,7 @@
+import { any } from '@amcharts/amcharts4/.internal/core/utils/Array';
+import { HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DSwatcherService } from 'src/app/service/user.service';
 
@@ -14,9 +16,21 @@ export class UserComponent implements OnInit {
   username = '';
   listuser: any;
   loading = true;
-  constructor(private dsWatcherService: DSwatcherService, private route: Router, private message: NzMessageService, private zone: NgZone) {
-
+  current = 1;
+  selectPermission = '';
+  selectStatus : any ;
+  
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10];
+  constructor(private dsWatcherService: DSwatcherService,
+    private route: Router,
+    private message: NzMessageService,
+    private zone: NgZone,
+    private router: ActivatedRoute) {
   }
+
 
   ngOnInit(): void {
     this.zone.run(() => {
@@ -24,10 +38,41 @@ export class UserComponent implements OnInit {
     });
   }
 
+  getRequestParams(searchUsername: string, page: number, pageSize: number, permission: string, status: boolean): any{
+    let params: any ={};
+    
+    if(searchUsername){
+      params['username'] = searchUsername;
+    }
+
+    if(page){
+      params['page'] = page -1;
+    }
+
+    if(pageSize){
+      params['size'] = pageSize;
+    }
+
+    if(permission){
+      params['permission'] = permission;
+    }
+
+    if(status != null){
+      params['status'] = status;
+      console.log(status);
+    }
+    
+    return params;
+  }
+  
   retrieveData(): void {
-    this.dsWatcherService.getAll().subscribe(
+    const params = this.getRequestParams(this.username, this.page, this.pageSize, this.selectPermission, this.selectStatus);
+    
+    this.dsWatcherService.getAll(params).subscribe(
       data => {
-        this.listuser = data;
+        const { users, totalItems } = data;
+        this.listuser = users;
+        this.count = totalItems;
         for (var user of this.listuser) {
           if (user.permission == "user") {
             user.permission = "Người dùng";
@@ -42,29 +87,39 @@ export class UserComponent implements OnInit {
       error => {
         console.log(error);
       }
-    );
+      );
+      
+      this.loading = false;
+    }
 
-    this.loading = false;
-  }
-
-  //trigger input search
-  keyDown(event: any) {
-    if (event.keyCode == 13) {
+    handlePageChange(event: number): void {
+      this.page = event;
+      this.retrieveData();
+    }
+    
+    //trigger input search
+    keyDown(event: any) {
+      if (event.keyCode == 13) {
       this.btnSearch();
     }
   }
 
+  params: any;
+
   btnSearch(): void {
-    this.loading = false;
-    this.dsWatcherService.findByUserName(this.username).subscribe(
-      data => {
-        this.listuser = data;
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    // this.loading = false;
+    // this.dsWatcherService.filter(this.params).subscribe(
+    //   data => {
+    //     this.listuser = data;
+    //     console.log(data);
+    //     console.log(this.selectPermission, this.selectStatus);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
+    this.page = 1;
+    this.retrieveData();
   }
 
   btnAdd(): void {
@@ -102,4 +157,6 @@ export class UserComponent implements OnInit {
       }
     )
   }
+
+
 }

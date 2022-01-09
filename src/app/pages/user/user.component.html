@@ -5,8 +5,17 @@
   </div>
 
   <div class="search-add">
-    <input class="form-control" type="text" name="search" id="userSearch" placeholder="Tìm kiếm" [(ngModel)]="username"
-      (keydown)='keyDown($event)'>
+    <input class="form-control" type="text" name="search" id="userSearch" placeholder="Lọc theo username"
+      [(ngModel)]="username" (keydown)='keyDown($event)'>
+    <nz-select nzAllowClear nzPlaceHolder="Lọc theo quyền" class="selectBox" name="selectPermission" [(ngModel)]="selectPermission">
+      <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
+      <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
+      <nz-option nzValue="supervisor" nzLabel="Giám sát"></nz-option>
+    </nz-select>
+    <nz-select nzAllowClear nzPlaceHolder="Lọc theo trạng thái" class="selectBox" name="selectStatus" [(ngModel)]="selectStatus">
+      <nz-option [nzValue]=true nzLabel="Hoạt động"></nz-option>
+      <nz-option [nzValue]=false nzLabel="Ngưng hoạt động"></nz-option>
+    </nz-select>
     <button nz-button nzType="primary" id="btn-search" (click)="btnSearch()"><i nz-icon nzType="search"
         nzTheme="outline"></i>
       Tìm kiếm</button>
@@ -15,20 +24,27 @@
   </div>
   <hr>
   <div>
-    <nz-table #nzTable [nzData]="listuser" [nzLoading]="loading" [nzPageSize]="10" class="table">
+    <nz-table #nzTable [nzData]="listuser" [nzLoading]="loading" nzShowPagination="false" [nzScroll]="{ y: '300px' }"
+      class="table">
       <thead class="thead">
         <tr>
-          <th>STT</th>
+          <th nzWidth="60px">STT</th>
+          <th nzWidth="60px">ID</th>
           <th>Tài khoản</th>
           <th>Quyền</th>
-          <th>Trạng thái</th>
+          <th nzWidth="120px">Trạng thái</th>
           <th>Email</th>
           <th>Thao tác</th>
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr *ngFor="let i of nzTable.data">
+        <tr *ngFor="let i of nzTable.data | paginate: {
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: count
+        };">
           <td class="counterCell"></td>
+          <td>{{i.id}}</td>
           <td>{{i.username}}</td>
           <td>{{i.permission}}</td>
           <td #active *ngIf="i.status">
@@ -49,17 +65,34 @@
           </td>
           <td>{{i.email}}</td>
           <td class="action">
-            <button nz-button nzType="primary" (click)="Edit(i.id)">Edit</button>
+            <i class="iconAction" style="font-size: large;" nz-icon nzType="edit" nzTheme="twotone" (click)="Edit(i.id)"
+              nzIconfont="iconfont"></i>
             <nz-divider nzType="vertical"></nz-divider>
 
             <nz-switch [(ngModel)]="i.status" (ngModelChange)=checkStatusSwitch(i.id,i)></nz-switch>
             <nz-divider nzType="vertical"></nz-divider>
 
-            <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle='Bạn muốn xoá người dùng {{i.username}}'
-              nzPopconfirmPlacement='topLeft' (nzOnConfirm)="Delete(i.id, i.username)">Delete</button>
+            <i class="iconAction" nz-icon nzTheme="twotone" nzType="delete" nzTwotoneColor="red">
+              <nz-popconfirm nzTitle="Are you sure?" (nzOnConfirm)="Delete(i.id, i.username)">
+                <a nz-popconfirm>Delete</a>
+              </nz-popconfirm>
+
+            </i>
+            <!-- <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle=''
+              nzPopconfirmPlacement='topLeft' >Delete</button>
+            (nzOnConfirm)="Delete(i.id, i.username)" nzTitle=`Bạn muốn xoá người dùng {{i.username}}`
+              nzPopconfirmPlacement="
+            topLeft">
+            -->
           </td>
         </tr>
       </tbody>
     </nz-table>
+    <div>
+      <pagination-controls
+      [responsive]="true"
+      (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
   </div>
 </div>
