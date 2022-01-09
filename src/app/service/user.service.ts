@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -11,8 +11,8 @@ export class DSwatcherService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(params: any): Observable<any> {
+    return this.http.get(baseUrl, { params });
   }
 
   get(id: any): Observable<any> {
@@ -37,5 +37,10 @@ export class DSwatcherService {
 
   findByUserName(userName: any): Observable<any> {
     return this.http.get(`${baseUrl}?userName=${userName}`);
+  }
+
+  filter(queryParams:any):Observable<any>{
+    const opts = { params: new HttpParams(queryParams)};
+    return this.http.get(`${baseUrl}/filter`, opts);
   }
 }
