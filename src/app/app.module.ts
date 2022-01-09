@@ -15,6 +15,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NgZorroAntdModule } from './ng-antd-zorro/ng-zorro-antd.module';
 import { LayoutComponent } from './layout/layout.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 registerLocaleData(en);
@@ -33,7 +34,8 @@ registerLocaleData(en);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: NZ_I18N, useValue:	vi_VN }],
   bootstrap: [AppComponent]
