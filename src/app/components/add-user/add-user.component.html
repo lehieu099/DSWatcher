@@ -7,7 +7,7 @@
         <nz-form-item>
             <nz-form-label nzFor="" nzSpan="7" nzRequired>Username</nz-form-label>
             <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl" nzSpan="12">
-                <input class="input" nzInput formControlName="userName" placeholder="Username" minlength="6" name="minlength">
+                <input class="input" nzInput formControlName="username" placeholder="Username" minlength="6" name="minlength">
                 <ng-template #userErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">Please enter username</ng-container>
                     <ng-container *ngIf="control.hasError('minlength')">Min length is 6</ng-container>
@@ -16,12 +16,12 @@
         </nz-form-item>
 
         <nz-form-item>
-            <nz-form-label nzFor="" nzSpan="7" nzRequired>Permission</nz-form-label>
+            <nz-form-label nzFor="" nzSpan="7" nzRequired>permission</nz-form-label>
             <nz-form-control nzValidatingTip="Validating..." nzSpan="12"  >
-                <nz-select formControlName="perMission" [ngModel]="'user'" nzPlaceHolder="Please choose permission">
+                <nz-select formControlName="permission" [ngModel]="'user'" nzPlaceHolder="Please choose permission">
                     <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
                     <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
-                    <nz-option nzValue="Supervisor" nzLabel="Giám sát"></nz-option>
+                    <nz-option nzValue="permission" nzLabel="Giám sát"></nz-option>
                 </nz-select>
             </nz-form-control>
         </nz-form-item>

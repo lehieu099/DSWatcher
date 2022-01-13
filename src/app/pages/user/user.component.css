@@ -1,5 +1,5 @@
 .container {
-    height: 750px;
+    height: 510px;
     left: 282px;
     top: 80px;
     background: #FFFFFF;
@@ -24,7 +24,6 @@
     height: 36px;
     background: #FFFFFF;
     align-items: center;
-    display: flex;
     margin: 0 30px;
     font-family: 'Open Sans';
     font-style: normal;
@@ -32,26 +31,43 @@
 }
 
 .search-add input {
-    width: 250px;
-    height: 35px;
-    left: 992px;
-    top: 142px;
+    height: 34px;
+    /* left: 992px; */
+    width: 150px;
+    /* top: 142px; */
     background: #FFFFFF;
-    border: 1px solid #CDD0D3;
+    border: 2px solid #CDD0D3;
     box-sizing: border-box;
     border-radius: 2px;
 }
 
+.selectBox {
+    margin-left: 14px;
+    border: 1px solid #CDD0D3;
+    border-radius: 2px;
+    width: 150px;
+}
+
+.iconAction {
+    margin: 3px;
+    font-size: larger;
+}
+
+.iconAction:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
 #btn-search {
-    height: 35px;
+    height: 32px;
     margin-left: 14px;
     border-radius: 2px;
 }
 
 #btn-addUser {
-    height: 35px;
+    height: 32px;
     margin-left: auto;
-    background: #2D9CDB;
+    background: #1890ff;
     border-radius: 2px;
     color: #FFFFFF;
 }
@@ -72,14 +88,42 @@
 .ant-table-tbody>tr>td {
     border-bottom: 1px solid #f0f0f0;
     transition: background 0.3s;
+    font-size: 13px;
     /* text-align: center; */
 }
 
 .ant-table-thead>tr>th {
     color: rgba(0, 0, 0, 0.85);
-    font-weight: 500;
+    font-weight: 900;
     text-align: -webkit-center;
     background: #fafafa;
     border-bottom: 1px solid #f0f0f0;
     transition: background 0.3s ease;
+}
+
+.pagination {
+    text-align: center;
+    bottom: 32px;
+    position: absolute;
+    display: contents;
+}
+
+
+/* @media screen and (max-width: 640px) {} */
+
+@media (max-width: 640px) {
+    .search-add{
+        height: fit-content;
+    }
+    .selectBox {
+        border: 1px solid #CDD0D3;
+        border-radius: 2px;
+        width: 150px;
+        margin: 10px 0 0 0;
+    }
+    #btn-search{
+        height: 32px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+    }
 }
