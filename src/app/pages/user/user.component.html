@@ -3,24 +3,31 @@
     <span>Danh sách tài khoản</span>
     <hr>
   </div>
-
-  <div class="search-add">
-    <input class="form-control" type="text" name="search" id="userSearch" placeholder="Lọc theo username"
-      [(ngModel)]="username" (keydown)='keyDown($event)'>
-    <nz-select nzAllowClear nzPlaceHolder="Lọc theo quyền" class="selectBox" name="selectPermission" [(ngModel)]="selectPermission">
-      <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
-      <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
-      <nz-option nzValue="supervisor" nzLabel="Giám sát"></nz-option>
-    </nz-select>
-    <nz-select nzAllowClear nzPlaceHolder="Lọc theo trạng thái" class="selectBox" name="selectStatus" [(ngModel)]="selectStatus">
-      <nz-option [nzValue]=true nzLabel="Hoạt động"></nz-option>
-      <nz-option [nzValue]=false nzLabel="Ngưng hoạt động"></nz-option>
-    </nz-select>
-    <button nz-button nzType="primary" id="btn-search" (click)="btnSearch()"><i nz-icon nzType="search"
-        nzTheme="outline"></i>
-      Tìm kiếm</button>
-    <button nz-button id="btn-addUser" (click)="btnAdd()">
-      <i nz-icon nzType="plus" nzTheme="outline"></i>Thêm tài khoản</button>
+  <div class="filter-container">
+    <div nz-row nzGutter="{ xs: 8, sm: 16, md: 24, lg: 32 }" nzAlign="top" class="search-add">
+      <div nz-col nzSpan="12" class="gutter-row">
+        <input class="form-control" type="text" name="search" id="userSearch" placeholder="Lọc theo username"
+          [(ngModel)]="username" (keydown)='keyDown($event)'>
+        <nz-select nzAllowClear nzPlaceHolder="Lọc theo quyền" class="selectBox" name="selectPermission"
+          [(ngModel)]="selectPermission">
+          <nz-option nzValue="user" nzLabel="Người dùng"></nz-option>
+          <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
+          <nz-option nzValue="supervisor" nzLabel="Giám sát"></nz-option>
+        </nz-select>
+        <nz-select nzAllowClear nzPlaceHolder="Lọc theo trạng thái" class="selectBox" name="selectStatus"
+          [(ngModel)]="selectStatus">
+          <nz-option [nzValue]=true nzLabel="Hoạt động"></nz-option>
+          <nz-option [nzValue]=false nzLabel="Ngưng hoạt động"></nz-option>
+        </nz-select>
+        <button nz-button nzType="primary" id="btn-search" (click)="btnSearch()"><i nz-icon nzType="search"
+            nzTheme="outline"></i>
+          Tìm kiếm</button>
+      </div>
+      <div nz-col nzSpan="12" class="gutter-row">
+        <button nz-button id="btn-addUser" (click)="btnAdd()">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>Thêm tài khoản</button>
+      </div>
+    </div>
   </div>
   <hr>
   <div>
@@ -29,22 +36,18 @@
       <thead class="thead">
         <tr>
           <th nzWidth="60px">STT</th>
-          <th nzWidth="60px">ID</th>
+          <!-- <th>ID</th> -->
           <th>Tài khoản</th>
           <th>Quyền</th>
-          <th nzWidth="120px">Trạng thái</th>
+          <th>Trạng thái</th>
           <th>Email</th>
           <th>Thao tác</th>
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr *ngFor="let i of nzTable.data | paginate: {
-          itemsPerPage: pageSize,
-          currentPage: page,
-          totalItems: count
-        };">
+        <tr *ngFor="let i of listuser">
           <td class="counterCell"></td>
-          <td>{{i.id}}</td>
+          <!-- <td>{{i.id}}</td> -->
           <td>{{i.username}}</td>
           <td>{{i.permission}}</td>
           <td #active *ngIf="i.status">
@@ -65,34 +68,21 @@
           </td>
           <td>{{i.email}}</td>
           <td class="action">
-            <i class="iconAction" style="font-size: large;" nz-icon nzType="edit" nzTheme="twotone" (click)="Edit(i.id)"
+            <i class="iconAction" nz-icon nzType="edit" nzTheme="twotone" (click)="Edit(i.id)"
               nzIconfont="iconfont"></i>
-            <nz-divider nzType="vertical"></nz-divider>
 
-            <nz-switch [(ngModel)]="i.status" (ngModelChange)=checkStatusSwitch(i.id,i)></nz-switch>
-            <nz-divider nzType="vertical"></nz-divider>
-
-            <i class="iconAction" nz-icon nzTheme="twotone" nzType="delete" nzTwotoneColor="red">
-              <nz-popconfirm nzTitle="Are you sure?" (nzOnConfirm)="Delete(i.id, i.username)">
-                <a nz-popconfirm>Delete</a>
-              </nz-popconfirm>
-
+            <i class="iconAction" nz-icon nzTheme="twotone" nzType="delete" nzTwotoneColor="red"
+              (click)="showConfirm(i.id, i.username)">
             </i>
-            <!-- <button nz-button nzDanger nz-popconfirm nzPopconfirmTitle=''
-              nzPopconfirmPlacement='topLeft' >Delete</button>
-            (nzOnConfirm)="Delete(i.id, i.username)" nzTitle=`Bạn muốn xoá người dùng {{i.username}}`
-              nzPopconfirmPlacement="
-            topLeft">
-            -->
+            <nz-switch nzSize="small" [(ngModel)]="i.status" (ngModelChange)=checkStatusSwitch(i.id,i)></nz-switch>
           </td>
         </tr>
       </tbody>
     </nz-table>
-    <div>
-      <pagination-controls
-      [responsive]="true"
-      (pageChange)="handlePageChange($event)"
-      ></pagination-controls>
+    <div class="pagination">
+      <nz-pagination [nzPageIndex]="page" [nzTotal]="count" [nzSize]="'small'" nzShowSizeChanger
+        [nzPageSizeOptions]="pageSizeOptions" (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
     </div>
   </div>
 </div>

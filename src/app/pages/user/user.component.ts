@@ -3,6 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { DSwatcherService } from 'src/app/service/user.service';
 
 
@@ -16,19 +17,21 @@ export class UserComponent implements OnInit {
   username = '';
   listuser: any;
   loading = true;
-  current = 1;
   selectPermission = '';
-  selectStatus : any ;
-  
-  page = 1;
+  selectStatus: any;
+
+  page = 0;
   count = 0;
   pageSize = 10;
-  pageSizes = [5, 10];
+  totalPages = 0;
+  pageSizeOptions = [10, 20];
+  confirmModal: any;
   constructor(private dsWatcherService: DSwatcherService,
     private route: Router,
     private message: NzMessageService,
     private zone: NgZone,
-    private router: ActivatedRoute) {
+    private router: ActivatedRoute,
+    private modal: NzModalService) {
   }
 
 
@@ -38,68 +41,75 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getRequestParams(searchUsername: string, page: number, pageSize: number, permission: string, status: boolean): any{
-    let params: any ={};
-    
-    if(searchUsername){
+  getRequestParams(searchUsername: string, page: number, pageSize: number, permission: string, status: boolean): any {
+    let params: any = {};
+
+    if (searchUsername) {
       params['username'] = searchUsername;
     }
 
-    if(page){
-      params['page'] = page -1;
+    if (page) {
+      params['page'] = page;
     }
 
-    if(pageSize){
+    if (pageSize) {
       params['size'] = pageSize;
     }
 
-    if(permission){
+    if (permission) {
       params['permission'] = permission;
     }
 
-    if(status != null){
+    if (status != null) {
       params['status'] = status;
-      console.log(status);
     }
-    
+
     return params;
   }
-  
+
   retrieveData(): void {
     const params = this.getRequestParams(this.username, this.page, this.pageSize, this.selectPermission, this.selectStatus);
-    
+    let urlParams = this.route.navigate(
+      [],
+      {
+        relativeTo: this.router,
+        queryParams: params,
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+        skipLocationChange: false,
+      });
+
     this.dsWatcherService.getAll(params).subscribe(
-      data => {
-        const { users, totalItems } = data;
+      response => {
+        const { users, totalUsers, totalPages, currentPage, limit } = response;
         this.listuser = users;
-        this.count = totalItems;
-        for (var user of this.listuser) {
-          if (user.permission == "user") {
-            user.permission = "Người dùng";
-          }
-          else if (user.permission == "admin") {
-            user.permission = "Admin"
-          }
-          else user.permission = "Giám sát";
-        }
-        console.log(data);
+        this.count = totalUsers;
+        this.totalPages = totalPages;
+        this.page = currentPage;
+        this.pageSize = limit;
+        console.log(response);
       },
       error => {
         console.log(error);
       }
-      );
-      
-      this.loading = false;
-    }
+    );
 
-    handlePageChange(event: number): void {
-      this.page = event;
-      this.retrieveData();
-    }
-    
-    //trigger input search
-    keyDown(event: any) {
-      if (event.keyCode == 13) {
+    this.loading = false;
+  }
+
+  pageIndexChange(event: number): void {
+    this.page = event;
+    this.retrieveData();
+  }
+
+  pageSizeChange(event: number): void {
+    this.pageSize = event
+    console.log(event);
+    this.retrieveData();
+  }
+
+  //trigger input search
+  keyDown(event: any) {
+    if (event.keyCode == 13) {
       this.btnSearch();
     }
   }
@@ -107,17 +117,6 @@ export class UserComponent implements OnInit {
   params: any;
 
   btnSearch(): void {
-    // this.loading = false;
-    // this.dsWatcherService.filter(this.params).subscribe(
-    //   data => {
-    //     this.listuser = data;
-    //     console.log(data);
-    //     console.log(this.selectPermission, this.selectStatus);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
     this.page = 1;
     this.retrieveData();
   }
@@ -128,6 +127,36 @@ export class UserComponent implements OnInit {
 
   Edit(id: any): void {
     this.route.navigateByUrl(`users/${id}`)
+    console.log(this.router.root);
+  }
+
+
+  disableAccount = false;
+  checkStatusSwitch(id: any, data: any) {
+    this.dsWatcherService.update(id, data).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  showConfirm(i: any, username: any): void {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: `Bạn muốn xóa người dùng <b>${(username)}</b>?`,
+      nzContent: 'Dữ liệu không thể khôi phục !!!',
+      nzOnOk: () =>
+        new Promise((resolve, reject) => {
+          this.dsWatcherService.delete(i).subscribe(
+            response => {
+              this.retrieveData();
+            }
+          )
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log('Oops errors!'))
+    });
   }
 
   Delete(i: any, username: any): void {
@@ -142,21 +171,4 @@ export class UserComponent implements OnInit {
       }
     )
   }
-
-  disableAccount = false;
-  checkStatusSwitch(id: any, data: any) {
-    console.log(id);
-    console.log(data);
-
-    this.dsWatcherService.update(id, data).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-
-
 }
