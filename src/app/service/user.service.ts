@@ -34,13 +34,4 @@ export class DSwatcherService {
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
-
-  findByUserName(userName: any): Observable<any> {
-    return this.http.get(`${baseUrl}?userName=${userName}`);
-  }
-
-  filter(queryParams:any):Observable<any>{
-    const opts = { params: new HttpParams(queryParams)};
-    return this.http.get(`${baseUrl}/filter`, opts);
-  }
 }

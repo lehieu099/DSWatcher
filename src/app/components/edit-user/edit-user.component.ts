@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +25,8 @@ export class EditUserComponent implements OnInit {
     private fb: FormBuilder,
     private dsWatcherService: DSwatcherService,
     private route: ActivatedRoute,
-    private zone: NgZone
+    private zone: NgZone,
+    private location: Location
   ) {
     this.editUserForm = this.fb.group({
       usernameEdit: ['', [Validators.required]],
@@ -58,11 +60,10 @@ export class EditUserComponent implements OnInit {
       response => {
         // this.message.create('success', `Cập nhật người dùng thành công!`);
         this.router.navigateByUrl('/users');
-
       },
       error => {
         console.log(error);
-      }
+      }     
     )
   }
 
